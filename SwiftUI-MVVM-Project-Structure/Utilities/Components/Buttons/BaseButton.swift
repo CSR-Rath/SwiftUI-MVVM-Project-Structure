@@ -35,7 +35,6 @@ struct BaseButton: View {
             .frame(height: 50)
             .foregroundColor(foregroundColor)
             .background(isLoading ? backgroundColor.opacity(0.7) : backgroundColor)
-            // Clip the background into a capsule or rounded rectangle
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .disabled(isLoading)
