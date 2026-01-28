@@ -1,0 +1,14 @@
+//
+//  String+Extension.swift
+//  SwiftUI-MVVM-Project-Structure
+//
+//  Created by Design_PC on 28/11/25.
+//
+
+import Foundation
+
+extension Optional where Wrapped == String {
+    var isNotBlank: Bool {
+        self?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
+}
