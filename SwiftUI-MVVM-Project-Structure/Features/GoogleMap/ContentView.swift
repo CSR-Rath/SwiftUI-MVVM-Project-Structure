@@ -16,7 +16,7 @@ struct CompassLines: View {
     @StateObject private var locationManager = LocationManager()
     @State private var centerCoordinate: CLLocationCoordinate2D
     
-    @State private var mode: CompassMode = .none
+    @State private var mode: CompassDisplayMode = .none
     
     
     
@@ -100,9 +100,9 @@ struct CompassLines: View {
                 .opacity((mode == .compass || mode == .fullLinesCompass ) ? 1 : 0)
                 .animation(.easeInOut(duration: 0.3), value: mode == .compass || mode == .fullLinesCompass)
                 
-                InnerCompassData(
-                    radius: (circleSizeSmall / 2) + 60
-                )
+//                InnerCompassData(
+//                    radius: (circleSizeSmall / 2) + 60
+//                )
                 .opacity((mode == .fullLinesCompass ) ? 1 : 0)
                 .animation(.easeInOut(duration: 0.3), value: mode == .fullLinesCompass)
                 
@@ -260,125 +260,6 @@ struct SectorData {
     var isFire: Bool = false
 }
 
-
-struct InnerCompassData: View {
-    let radius: CGFloat
-    
-    
-    var sectors: [SectorData] = [
-        
-        SectorData(starLeft: 1, starRight: 1, starCenter: 1, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: false, isFire: false),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 2, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: true, isFire: false),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 3, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: false, isMountain: true, isFire: false),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 4, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: true, isFire: true),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 5, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: false, isFire: true),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 6, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: true, isFire: true),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 7, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: true, isFire: true),
-        SectorData(starLeft: 1, starRight: 1, starCenter: 8, leftColor: Color.black, rightColor: Color.black, centerColor: Color.black, isWater: true, isMountain: true, isFire: false)
-        
-    ]
-    
-    var body: some View {
-        ForEach(0..<sectors.count, id: \.self) { i in
-            let angle = (Double(i) * 45.0) + 22.5
-            let sector = sectors[i]
-            
-            ZStack {
-                VStack(spacing: 0) {
-                    
-                    let textSize: CGFloat = 14
-                    let textWeight: Font.Weight = .regular
-                    
-                    iconView(
-                        systemName: "flame.circle",
-                        isVisible: sector.isFire,
-                        color: .red
-                    )
-                    
-                    // ⛰ 💧 MIDDLE ICONS
-                    HStack(spacing: 12) {
-                        iconView(
-                            systemName: "triangle.fill",
-                            isVisible: sector.isMountain,
-                            color: .green
-                        )
-                        iconView(
-                            systemName: "waveform.path.ecg",
-                            isVisible: sector.isWater,
-                            color: .blue
-                        )
-                    }
-                    
-                    // ⭐ LEFT / RIGHT STARS
-                    HStack(alignment: .top, spacing: 0) {
-                        
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 5, height: 5)
-                            .alignmentGuide(.firstTextBaseline) { d in
-                                d[VerticalAlignment.firstTextBaseline]
-                            }
-                        
-                        Text("\(sector.starLeft)")
-                            .font(.system(size: textSize, weight: textWeight))
-                            .foregroundColor(sector.leftColor)
-                        
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 5, height: 5)
-                        
-                        
-                        Text("\(sector.starRight)")
-                            .font(.system(size: textSize, weight: textWeight))
-                            .foregroundColor(sector.rightColor)
-                            .padding(.leading, 10)
-                        
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 5, height: 5)
-                    }
-                    
-                    Text("\(sector.starCenter)")
-                        .font(.system(size: textSize, weight: textWeight))
-                        .foregroundColor(sector.centerColor)
-                    
-                    if sector.isFire == true {
-                        Rectangle()
-                            .fill(Color.blue)
-                            .frame(width: 5, height: 5)
-                    }
-                    
-                }
-                
-                // Ensures content scales down to fit the sector width
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-                .frame(width: 70)
-                .offset(y: -radius)
-                .rotationEffect(.degrees(angle))
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func iconView(
-        systemName: String,
-        isVisible: Bool?,
-        color: Color
-    ) -> some View {
-        
-        if isVisible == true {
-            Image(systemName: systemName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 13, height: 13)
-                .foregroundColor(color)
-        } else {
-            Color.clear
-                .frame(width: 13, height: 13)
-        }
-    }
-}
 
 struct InnerCompassDataCenter: View {
     

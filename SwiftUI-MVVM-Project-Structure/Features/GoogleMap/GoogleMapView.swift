@@ -16,16 +16,14 @@ struct GoogleMapView: UIViewRepresentable {
         
         let mapView = GMSMapView()
         mapView.camera  = camera
-        
-        //GMSMapView(frame: .zero, camera: camera)
-//                mapView.mapType = .satellite
+
         mapView.isMyLocationEnabled = true
         mapView.settings.compassButton = false
         mapView.settings.myLocationButton = false
         mapView.delegate = context.coordinator
         
         //Show maker default
-//        context.coordinator.marker.map = mapView
+        context.coordinator.marker.map = mapView
         
         return mapView
     }

@@ -13,9 +13,10 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
 
     private let manager = CLLocationManager()
 
-    @Published var userLocation: CLLocation?
+    // default counttry
+    @Published var userLocation: CLLocation? //= CLLocation(latitude: -12.5, longitude: 18.5)
     @Published var degree: Double = 0.0   // 🧭 HEADING (0–360) DEGREE
-    
+
     @Published var isLocationUpdating = false
     @Published var isHeadingUpdating = false
 
@@ -23,7 +24,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.headingFilter = 1            // update every 1°
+        manager.headingFilter = 1// update every 1°
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         manager.startUpdatingHeading()

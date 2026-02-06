@@ -22,8 +22,8 @@ struct SwiftUI_MVVM_Project_StructureApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PostScreen()
-//            CommpassApp()
+//            PostScreen()
+            CommpassApp()
 //            CompassOverlay()
 //            CompassLines()
 //            RootView()
