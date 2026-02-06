@@ -12,8 +12,14 @@ enum UserEndpoint: APIConfiguration {
     case getPublicNews(page: Int, limit: Int, type: String?)
     case updateProfile
     case fetchProfile
+    case posts
+    case comments
+    case albums
+    case photos
+    case myAPILogin
+    case myAPIRefresh
+    case myAPIProfile
     
-    var version: String { "/api/v1" }
     
     var path: String {
         switch self {
@@ -21,13 +27,26 @@ enum UserEndpoint: APIConfiguration {
         case .fetchProfile: return "/users"
         case .updateProfile: return "/update/users"
         case .getPublicNews: return "/news"
+            
+        // ------
+        case .posts: return "/posts"
+        case .comments: return "/comments"
+        case .albums: return "/albums"
+        case .photos: return "/photos"
+            
+            
+         // ---- MY API ---
+        case .myAPILogin: return "login"
+        case .myAPIRefresh: return "refresh"
+        case .myAPIProfile: return "profile"
+            
         }
     }
     
     // Handle method for case endpoins
     var method: HTTPMethod {
         switch self {
-        case .login:
+        case .login, .myAPILogin:
             return .POST
         case .updateProfile:
             return .PUT
@@ -39,7 +58,7 @@ enum UserEndpoint: APIConfiguration {
     // Handle header has or has no
     var requiresAuth: Bool {
         switch self {
-        case .login:
+        case .login, .myAPILogin:
             return false
         default:
             return true
@@ -54,6 +73,17 @@ enum UserEndpoint: APIConfiguration {
             return nil
         }
     }
+    
+    // We can handle to data here
+//    var body: Data? {
+//        switch self {
+//        case .refreshToken(let token):
+//            let body = ["refreshToken": token]
+//            return try? JSONSerialization.data(withJSONObject: body)
+//        }
+//    }
+    
+    
     
     var queryItems: [URLQueryItem]? {
         switch self {
@@ -73,3 +103,4 @@ enum UserEndpoint: APIConfiguration {
         }
     }
 }
+

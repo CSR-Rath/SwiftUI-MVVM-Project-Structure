@@ -1,5 +1,5 @@
 //
-//  UDKey.swift
+//  InfoKey.swift
 //  SwiftUI-MVVM-Project-Structure
 //
 //  Created by Design_PC on 28/1/26.
@@ -7,7 +7,6 @@
 
 internal import Foundation
 
-enum UDKey {
-    static let appRoot = "app_root"
-    static let userToken = "user_token"
+enum InfoKey{
+    static let baseURL = "BASE_URL"
 }

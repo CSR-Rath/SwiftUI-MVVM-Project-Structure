@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol APIConfiguration {
-    var version: String { get }
+//    var version: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var body: Data? { get }

@@ -5,7 +5,7 @@
 //  Created by Design_PC on 28/11/25.
 //
 
-import Foundation
+internal import Foundation
 
 extension Optional where Wrapped == String {
     var isNotBlank: Bool {

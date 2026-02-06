@@ -9,6 +9,7 @@ import SwiftUI
 import GoogleMaps
 internal import Combine
 
+//@available(iOS 17.0, *)
 @main
 struct SwiftUI_MVVM_Project_StructureApp: App {
     @StateObject var appState = AppStateManager()
@@ -16,17 +17,20 @@ struct SwiftUI_MVVM_Project_StructureApp: App {
     
     init() {
         
-        GMSServices.provideAPIKey("AIzaSyDSXrwu6JBuY6VfJfjCcXDdOp2PqIwbGbk")
+        GMSServices.provideAPIKey("AIzaSyDSXrwu6JBuY6VfJfjCcXDdOp2PqIwbGbk")//AIzaSyDSXrwu6JBuY6VfJfjCcXDdOp2PqIwbGbk
     }
     
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(appState)
-                .onAppear(){
-                    
-//                    appState.root = .main
-                }
+            PostScreen()
+//            CommpassApp()
+//            CompassOverlay()
+//            CompassLines()
+//            RootView()
+//                .environmentObject(appState)
+//                .onAppear(){
+//                    
+//                }
         }
     }
 }

@@ -14,9 +14,22 @@
 		08772EE62ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-MVVM-Project-Structure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0868510B2F347C7300CD6DAC /* Exceptions for "SwiftUI-MVVM-Project-Structure" folder in "SwiftUI-MVVM-Project-Structure" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 08772EE52ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		08772EE82ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0868510B2F347C7300CD6DAC /* Exceptions for "SwiftUI-MVVM-Project-Structure" folder in "SwiftUI-MVVM-Project-Structure" target */,
+			);
 			path = "SwiftUI-MVVM-Project-Structure";
 			sourceTree = "<group>";
 		};
@@ -136,6 +149,8 @@
 /* Begin XCBuildConfiguration section */
 		08772EF42ED942810009E126 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08772EE82ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */;
+			baseConfigurationReferenceRelativePath = Utilities/Configure/debug.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -200,6 +215,8 @@
 		};
 		08772EF52ED942810009E126 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08772EE82ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */;
+			baseConfigurationReferenceRelativePath = Utilities/Configure/release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -257,6 +274,8 @@
 		};
 		08772EF72ED942810009E126 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08772EE82ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */;
+			baseConfigurationReferenceRelativePath = Utilities/Configure/debug.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -265,6 +284,7 @@
 				DEVELOPMENT_TEAM = HCSG6K6N58;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-MVVM-Project-Structure/Resources/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs your location to work correctly.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -281,17 +301,23 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rath.core.data.SwiftUI-MVVM-Project-Structure";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		08772EF82ED942810009E126 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 08772EE82ED9427C0009E126 /* SwiftUI-MVVM-Project-Structure */;
+			baseConfigurationReferenceRelativePath = Utilities/Configure/release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -300,6 +326,7 @@
 				DEVELOPMENT_TEAM = HCSG6K6N58;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-MVVM-Project-Structure/Resources/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app needs your location to work correctly.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -316,11 +343,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rath.core.data.SwiftUI-MVVM-Project-Structure";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

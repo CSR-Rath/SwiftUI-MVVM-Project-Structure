@@ -10,7 +10,7 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    @MainActor
+//    @MainActor
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext

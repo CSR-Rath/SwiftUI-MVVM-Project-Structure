@@ -7,7 +7,7 @@
 
 
 func debugLog(_ message: Any) {
-#if DEBUG
+//#if DEBUG
     print(message)
-#endif
+//#endif
 }

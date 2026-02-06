@@ -5,7 +5,7 @@
 //  Created by Design_PC on 28/1/26.
 //
 
-import Foundation
+internal import Foundation
 
 extension Data {
     func prettyPrintedJSON() {
