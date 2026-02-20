@@ -2,7 +2,7 @@
 //  ViewModel.swift
 //  SwiftUI-MVVM-Project-Structure
 //
-//  Created by Design_PC on 6/2/26.
+//  Created by Chhan Sophearath on 6/2/26.
 //
 
 internal import Combine

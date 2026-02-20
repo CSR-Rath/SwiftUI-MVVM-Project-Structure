@@ -2,7 +2,7 @@
 //  APIManager.swift
 //  iosApp
 //
-//  Created by Design_PC on 28/1/26.
+//  Created by Chhan Sophearath on 28/1/26.
 //
 
 internal import Foundation
@@ -69,13 +69,11 @@ final class ApiManager {
         switch httpResponse.statusCode {
         case 200...299:
             
-            
-            
             do {
                 
                 return try JSONDecoder().decode(T.self, from: data)
             } catch{
-                //                logDecodingError(error, data: data)
+                logDecodingError(error as! DecodingError, data: data)
                 throw APIError.decodingFailed
             }
             
@@ -205,7 +203,7 @@ enum AuthEndpoint: APIConfiguration {
     
     var path: String { "refresh" }
     
-    var method: HTTPMethod { .POST }
+    var method: HTTPMethods { .POST }
     
     var requiresAuth: Bool { false }
     
@@ -226,6 +224,7 @@ struct RefreshTokenResponse: Codable {
 }
 
 
+// MARK: Actor it is similarity class, but prevent multiple thead the same times
 actor TokenRefresher {
     
     static let shared = TokenRefresher()

@@ -2,14 +2,14 @@
 //  Exampple.swift
 //  iosApp
 //
-//  Created by Design_PC on 28/1/26.
+//  Created by Chhan Sophearath on 28/1/26.
 //
 
 import UIKit
 internal import Combine
 import SwiftUI
 
-struct Exampple: Codable{
+struct Example: Codable{
     let response : Int?
 }
 
@@ -31,10 +31,12 @@ struct UserTest: Codable{
 func login() async {
     do {
         
-//        let request = Login(phone: "0987654", password: "09876")
-//        let response: UserTest = try await ApiManager.shared.request(
-//            UserEndpoint.login(credentials: request.toData())
-//        )
+        let request = Login(phone: "0987654", password: "09876")
+        let response: UserTest = try await ApiManager.shared.request(
+            UserEndpoint.login(credentials: request.toData())
+        )
+        
+        print("response: \(response)")
         
     } catch {
         print("Login failed:", error)
@@ -54,9 +56,13 @@ enum LoadResult {
     case phones([Phone])
 }
 
-@MainActor
+@MainActor // update UI
 class SyncWaitingAllCompletedViewModel: ObservableObject {
     
+    
+    //    .task {
+    //               await vm.asyncCall()
+    //           }
     @Published var posts1: [PostModel]?
     @Published var posts2: [PostModel]?
     @Published var posts3: [PostModel]?
@@ -77,50 +83,54 @@ class SyncWaitingAllCompletedViewModel: ObservableObject {
     }
 }
 
-//@MainActor
+@MainActor // update UI
 class SyncViewModel: ObservableObject {
     
+    //    .task {
+    //              await vm.asyncCall()
+    //           }
     @Published var posts1: [PostModel]?
     @Published var posts2: [User]?
     @Published var posts3: [Phone]?
     
-    func asyncCall() {
-        Task {
-            do {
-                try await withThrowingTaskGroup(of: LoadResult.self) { group in
-                    
-                    group.addTask {
-                        .posts(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
-                    }
-                    
-                    group.addTask {
-                        .users(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
-                    }
-                    
-                    group.addTask {
-                        .phones(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
-                    }
-                    
-                    for try await result in group {
-                        switch result {
-                        case .posts(let posts):
-                            self.posts1 = posts
-                        case .users(let users):
-                            self.posts2 = users
-                        case .phones(let phones):
-                            self.posts3 = phones
-                        }
+    func asyncCall() async {
+        do {
+            try await withThrowingTaskGroup(of: LoadResult.self) { group in
+                
+                group.addTask {
+                    .posts(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
+                }
+                
+                group.addTask {
+                    .users(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
+                }
+                
+                group.addTask {
+                    .phones(try await ApiManager.shared.request(UserEndpoint.fetchProfile))
+                }
+                
+                for try await result in group {
+                    switch result {
+                    case .posts(let posts):
+                        self.posts1 = posts
+                    case .users(let users):
+                        self.posts2 = users
+                    case .phones(let phones):
+                        self.posts3 = phones
                     }
                 }
-            } catch {
-                print("TaskGroup error:", error)
             }
+        } catch {
+            print("TaskGroup error:", error)
         }
     }
 }
 
-//@MainActor
+@MainActor // update UI
 class AwaitViewModel: ObservableObject {
+    //    .task {
+    //               await vm.awaitCall()
+    //           }
     
     @Published var posts1: [PostModel]?
     @Published var posts2: [PostModel]?

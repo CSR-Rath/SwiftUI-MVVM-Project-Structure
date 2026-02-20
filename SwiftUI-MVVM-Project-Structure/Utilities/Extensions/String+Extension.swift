@@ -2,7 +2,7 @@
 //  String+Extension.swift
 //  SwiftUI-MVVM-Project-Structure
 //
-//  Created by Design_PC on 28/11/25.
+//  Created by Chhan Sophearath on 28/11/25.
 //
 
 internal import Foundation

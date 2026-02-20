@@ -2,7 +2,7 @@
 //  UserEndpoint.swift
 //  iosApp
 //
-//  Created by Design_PC on 28/1/26.
+//  Created by Chhan Sophearath on 28/1/26.
 //
 
 import UIKit
@@ -19,7 +19,6 @@ enum UserEndpoint: APIConfiguration {
     case myAPILogin
     case myAPIRefresh
     case myAPIProfile
-    
     
     var path: String {
         switch self {
@@ -44,7 +43,7 @@ enum UserEndpoint: APIConfiguration {
     }
     
     // Handle method for case endpoins
-    var method: HTTPMethod {
+    var method: HTTPMethods {
         switch self {
         case .login, .myAPILogin:
             return .POST
@@ -73,16 +72,6 @@ enum UserEndpoint: APIConfiguration {
             return nil
         }
     }
-    
-    // We can handle to data here
-//    var body: Data? {
-//        switch self {
-//        case .refreshToken(let token):
-//            let body = ["refreshToken": token]
-//            return try? JSONSerialization.data(withJSONObject: body)
-//        }
-//    }
-    
     
     
     var queryItems: [URLQueryItem]? {

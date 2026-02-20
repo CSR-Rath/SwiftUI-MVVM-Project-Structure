@@ -2,12 +2,12 @@
 //  HTTPMethod.swift
 //  iosApp
 //
-//  Created by Design_PC on 28/1/26.
+//  Created by Chhan Sophearath on 28/1/26.
 //
 
 import UIKit
 
-enum HTTPMethod: String {
+enum HTTPMethods: String {
     case GET // get data
     case POST // create data
     case PUT // replace data

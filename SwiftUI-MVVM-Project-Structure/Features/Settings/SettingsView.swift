@@ -2,13 +2,13 @@
 //  SettingsView.swift
 //  SwiftUI-MVVM-Project-Structure
 //
-//  Created by Design_PC on 28/1/26.
+//  Created by Chhan Sophearath on 28/1/26.
 //
 
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var appState: AppStateManager
+    @EnvironmentObject var appState: NavigationRouter
 
     var body: some View {
         VStack(spacing: 20) {
