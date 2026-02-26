@@ -14,8 +14,7 @@ struct AuthRootView: View {
     @State var showLoading = false
     
     var body: some View {
-        ZStack {
-            
+        ZStack { 
             VStack(spacing: 20) {
                 Text("Login")
                     .font(.largeTitle)

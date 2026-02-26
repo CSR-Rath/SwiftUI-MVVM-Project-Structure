@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  SwiftUI-MVVM-Project-Structure
+
+  Created by Chhan Sophearath on 24/2/26.
+  
+*/
+
+
+login_title = "ចូលគណនី";
+welcome_message = "សូមស្វាគមន៍មកវិញ";
+logout_button = "ចាកចេញ";

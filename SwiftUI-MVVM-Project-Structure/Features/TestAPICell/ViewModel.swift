@@ -26,8 +26,10 @@ final class ViewModel: ObservableObject {
                 try await ApiManager.shared.request(UserEndpoint.myAPILogin)
             
             login = response
-            TokenStorage.saveAccessToken(response.accessToken)
-            TokenStorage.saveRefreshToken(response.refreshToken)
+            KeychainManager.save(key: .accessToken, value: response.accessToken)
+            KeychainManager.save(key: .refreshToken, value: response.refreshToken)
+//            TokenStorage.saveAccessToken(response.accessToken)
+//            TokenStorage.saveRefreshToken(response.refreshToken)
         } catch {
             errorMessage = error.localizedDescription
         }

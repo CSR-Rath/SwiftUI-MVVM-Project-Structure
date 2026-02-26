@@ -1,0 +1,25 @@
+//
+//  debug.xcconfig
+//  SwiftUI-MVVM-Project-Structure
+//
+//  Created by Chhan Sophearath on 5/2/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+BUNDLE_ID = com.rath.CoreStructure-iOS
+
+APP_NAME = SwiftUI Debug
+
+APP_ICON = AppIconDebug
+
+BASE_URL = https:/$()/jsonplaceholder.typicode.com/
+
+API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4-debug
+
+APP_VERSION = 2.0.0
+
+APP_BUILD = 2
+
+

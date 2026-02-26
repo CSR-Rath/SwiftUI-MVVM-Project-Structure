@@ -9,45 +9,62 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var appState: NavigationRouter
-
+    @EnvironmentObject var languageManager: LanguageManager
+    
     var body: some View {
         VStack(spacing: 30) {
-            Text("Home")
-                .font(.largeTitle)
-                .bold()
-
+           
+            
             Button("Push Notification") {
-                print("Tapped Push")
+                debugLog("Tapped Push")
                 sendLocalNotification()
             }
-
+            
+            
+            Button("Customer List") {
+                appState.push(.customerList) // PUSH
+            }
             
             Button("Go to Settings") {
                 appState.push(.settings) // PUSH
             }
-
-            Button("Go to profile") {
+            
+            Button("login_title".localized()) {
                 appState.push(.profile(userId: " A001"))
             }
+            
+            Button("welcome_message".localized()) {
+                appState.push(.profile(userId: "A001"))
+            }
+            
             
             Button("test") {
                 appState.push(.details(productId: "Test"))
             }
-
-
+            
+            Button("English") {
+                languageManager.currentLanguage = .english
+            }
+            
+            Button("Khmer") {
+                languageManager.currentLanguage = .khmer
+            }
+            
+            
             Button("Logout") {
                 appState.switchToAuth()
             }
             .foregroundColor(.red)
         }
         .padding()
+        .navigationTitle("Home")
     }
 }
 
 extension HomeView{
     
-   private func sendLocalNotification() {
-
+    private func sendLocalNotification() {
+        
         let content = UNMutableNotificationContent()
         content.title = "New Message"
         content.body = "Tap to open Profile"
@@ -57,15 +74,15 @@ extension HomeView{
         content.userInfo = [
             "type": "message"
         ]
-
+        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
+        
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,
             content: content,
             trigger: trigger
         )
-
+        
         UNUserNotificationCenter.current().add(request)
     }
 }
