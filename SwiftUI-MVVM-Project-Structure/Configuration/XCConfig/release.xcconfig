@@ -10,7 +10,7 @@
 
 
 // MARK: - for test pagination
-BUNDLE_ID = com.rath.CoreStructure-iOS
+BUNDLE_ID = com.rath.CoreStructure-iOS // com.compeny.myappname
 
 APP_NAME = SwiftUI Release
 

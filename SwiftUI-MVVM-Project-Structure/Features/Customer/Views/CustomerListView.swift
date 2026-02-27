@@ -10,33 +10,43 @@ import SwiftUI
 struct CustomerListView: View {
     
     @StateObject private var vm = CustomerViewModel()
+    @EnvironmentObject var appState: NavigationRouter
     
     var body: some View {
+        
+
         ZStack {
-            Color.gray.opacity(0.1)
+            Color.bgcolor
                 .ignoresSafeArea()
             
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(vm.customers) { customer in
                         CustomerCardView(customer: customer)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                appState.push(.profile(userId: "1234567890"))
+                            }
                             .onAppear {
                                 vm.loadMoreIfNeeded(currentItem: customer)
                             }
                     }
                 }
             }
-            
-            if vm.isLoading{
+            .refreshable {
+                await vm.fetchCustomers(status: .refreshing)
+            }
+
+            if vm.isLoading {
                 LoadingView()
             }
         }
-        .refreshable {
-            await vm.fetchCustomers(status: .refreshing)
-        }
+        .navigationTitle("Customers")
         .task {
             await vm.fetchCustomers()
         }
+        .menuToolbar(appState: appState)
         .navigationTitle("Customers")
     }
 }
+

@@ -11,6 +11,8 @@ import Security
 
 final class KeychainManager {
     
+//    @discardableResult is used to prevent warning when you call a function that returns a value, but you don’t use that value.
+    
     @discardableResult
     static func save(key: KeychainKeyEnum, value: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }

@@ -9,17 +9,20 @@ import SwiftUI
 
 enum AppRootType: String{
     case auth
-    case home 
+    case tabbr 
 }
 
+
+// MARK: - We use Hashable because NavigationStack requires it.
 enum RouteType: Hashable {
     case settings
     case customerList
+    case dragdrop
     case profile(userId: String)
     case details(productId: String)
+    
 }
 
-// MARK: - ViewBuilder using for return one view,
 extension RouteType {
     
     @ViewBuilder
@@ -29,8 +32,8 @@ extension RouteType {
         case .settings:
             SettingsView()
             
-        case .profile(let userId):
-            ProfileView(userId: userId)
+        case .profile(let  userId):
+            ProfileView()
             
         case .details(_):
             
@@ -38,6 +41,8 @@ extension RouteType {
         case .customerList:
             
             CustomerListView()
+        case .dragdrop:
+            DragDropListView()
         }
     }
 }

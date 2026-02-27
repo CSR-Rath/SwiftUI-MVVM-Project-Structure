@@ -23,7 +23,7 @@ final class LanguageManager: ObservableObject {
     
     private init() {
         // Load saved language or default to English
-        if let savedLang = UserDefaultsManager.shared.getString(for: .language),
+        if let savedLang = UserDefaultsManager.shared.getString(for: .appLanguage),
            let lang = LanguageKeyEnum(rawValue: savedLang) {
             self.currentLanguage = lang
         } else {
@@ -43,6 +43,6 @@ final class LanguageManager: ObservableObject {
     }
     
     private func saveLanguage() {
-        UserDefaultsManager.shared.set(currentLanguage.rawValue, for: .language)
+        UserDefaultsManager.shared.set(currentLanguage.rawValue, for: .appLanguage)
     }
 }

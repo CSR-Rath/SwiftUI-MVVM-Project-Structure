@@ -10,11 +10,11 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var appState: NavigationRouter
     
-    let userId: String
-    
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Profile: \(userId)")
+        
+        VStack{
+            
+            Text("Profile")
                 .font(.largeTitle)
                 .bold()
             
@@ -27,22 +27,9 @@ struct ProfileView: View {
             }
             
             Button("Push") {
-               
+                
             }
         }
-        .padding()
         .navigationTitle("Profile")
-//        .menuToolbar(appState: appState)
-        //        .navigationBarBackButtonHidden(true) // hide default back button
-        //        .toolbar {
-        //            ToolbarItem(placement: .navigationBarLeading) {
-        //                Button {
-        //                    debugLog("Menu tapped")
-        //                    appState.pop()
-        //                } label: {
-        //                    Image(systemName: "line.3.horizontal")
-        //                }
-        //            }
-        //        }
     }
 }

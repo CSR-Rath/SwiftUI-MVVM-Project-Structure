@@ -14,12 +14,11 @@ struct LoadingView: View {
         ZStack {
             Rectangle()
                 .fill(.black)
-                .opacity(0.5)
+                .opacity(0.3)
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
                 ProgressView()
-                
                 Text("Loading...")
             }
             .frame(width: 120, height: 120)

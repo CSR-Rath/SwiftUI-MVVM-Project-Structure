@@ -147,7 +147,7 @@ class HowToUseCryptoHelper {
         updatedRequest.hash = hash
         
         // 3️⃣ Convert to JSON
-        guard let jsonString = try? updatedRequest.toJSONString() else {
+        guard let jsonString =  updatedRequest.toJSONString() else {
             return ""
         }
         

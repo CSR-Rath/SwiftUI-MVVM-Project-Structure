@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var appState: NavigationRouter
-
+    
+    @AppStorage("appTheme") private var appTheme: AppTheme = .system
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Settings")
-                .font(.largeTitle)
-                .bold()
-
-            Button("Back") {
-                appState.pop()
+        ZStack{
+            Picker("Appearance", selection: $appTheme) {
+                Text("System").tag(AppTheme.system)
+                Text("Light").tag(AppTheme.light)
+                Text("Dark").tag(AppTheme.dark)
             }
+            .pickerStyle(.segmented)
+            .padding()
+            
         }
-        .padding()
     }
 }
 

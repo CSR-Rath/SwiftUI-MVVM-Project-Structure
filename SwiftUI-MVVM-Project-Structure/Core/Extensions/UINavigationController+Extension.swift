@@ -10,7 +10,7 @@ import UIKit
 
 var isSwipeBackEnabled: Bool = true
 
-// MARK: - This code help too enable or disable when hide navigationBarBackButtonHidden
+// MARK: - This code help to swipe screen when hide original back button
 extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
 
     override open func viewDidLoad() {

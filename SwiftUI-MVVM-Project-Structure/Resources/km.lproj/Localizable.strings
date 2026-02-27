@@ -6,7 +6,10 @@
   
 */
 
-
+// MARK: - Register screen
 login_title = "ចូលគណនី";
 welcome_message = "សូមស្វាគមន៍មកវិញ";
 logout_button = "ចាកចេញ";
+
+
+// MARK: - Home screen

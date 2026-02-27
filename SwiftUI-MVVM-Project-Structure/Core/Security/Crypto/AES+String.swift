@@ -63,7 +63,7 @@ extension String {
         }
         
         var cryptData = Data(count: data.count + kCCBlockSizeAES128)
-        let cryptLength = cryptData.count   // ✅ copy to local constant
+        let cryptLength = cryptData.count
         var numBytesDecrypted: size_t = 0
         
         let status = cryptData.withUnsafeMutableBytes { cryptBytes in

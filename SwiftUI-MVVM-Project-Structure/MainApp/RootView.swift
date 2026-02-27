@@ -13,23 +13,25 @@ struct RootView: View {
     var body: some View {
         switch appState.root {
             
-        case .home:
-            NavigationStack(path: $appState.homePath) {
-                MainTabbedView()
+        case .tabbr:
+            NavigationStack(path: $appState.tabBarPath) {
+                CustomTabView()
                     .navigationDestination(for: RouteType.self) { route in
                         route.build()
                     }
+                    .ignoresSafeArea()
+                    .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationBarTitleDisplayMode(.inline) // 👈 small
             
         case .auth:
-            NavigationStack(path: $appState.homePath) {
+            NavigationStack(path: $appState.tabBarPath) {
                 AuthRootView()
                     .navigationDestination(for: RouteType.self) { route in
                         route.build()
                     }
+                    .ignoresSafeArea()
+                    .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationBarTitleDisplayMode(.inline) // 👈 small
         }
     }
 }

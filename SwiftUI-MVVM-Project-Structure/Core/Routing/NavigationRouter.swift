@@ -11,18 +11,19 @@ internal import Combine
 @MainActor
 final class NavigationRouter: ObservableObject {
     @Published  var root: AppRootType = .auth
-    @Published  var homePath: [RouteType] = []
-    
+    @Published  var tabBarPath: [RouteType] = []
+                    
+        
     init() {
         loadRoot()
     }
     
     // MARK: - Root Management
-    func switchToHome() {
+    func switchToTabBar() {
         withAnimation(.easeInOut) {
-            self.root = .home
-            self.homePath = []
-            self.saveRoot(.home)
+            self.root = .tabbr
+            self.tabBarPath = []
+            self.saveRoot(.tabbr)
         }
     }
     
@@ -35,39 +36,39 @@ final class NavigationRouter: ObservableObject {
     
     // MARK: - Navigation Actions
     func push(_ route: RouteType , animation: Bool = true) {
-        guard homePath.last != route else { return }
+        guard tabBarPath.last != route else { return }
         if animation {
-            homePath.append(route)
+            tabBarPath.append(route)
             
         }else{
             noAnimation {
-                homePath.append(route)
+                tabBarPath.append(route)
             }
         }
     }
     
     func pop(animation: Bool = true) {
-        guard !homePath.isEmpty else { return }
+        guard !tabBarPath.isEmpty else { return }
         
         if animation{
-            homePath.removeLast()
+            tabBarPath.removeLast()
             
         }else{
             noAnimation {
-                homePath.removeLast()
+                tabBarPath.removeLast()
             }
         }
     }
     
     func popTo(_ route: RouteType) {
-        if let index = homePath.firstIndex(of: route) {
+        if let index = tabBarPath.firstIndex(of: route) {
             // This is cleaner and prevents flickering
-            homePath = Array(homePath.prefix(through: index))
+            tabBarPath = Array(tabBarPath.prefix(through: index))
         }
     }
     
     func popToRoot() {
-        homePath = []
+        tabBarPath = []
     }
     
     private func noAnimation(_ action: () -> Void) {
@@ -83,11 +84,11 @@ final class NavigationRouter: ObservableObject {
 extension NavigationRouter{
     
     private func saveRoot(_ root: AppRootType) {
-        UserDefaultsManager.shared.set(root.rawValue, for: .appRoot)
+        UserDefaultsManager.shared.set(root.rawValue, for: .appRootState)
     }
     
     private func loadRoot() {
-        if let raw = UserDefaultsManager.shared.getString(for: .appRoot),
+        if let raw = UserDefaultsManager.shared.getString(for: .appRootState),
            let root = AppRootType(rawValue: raw) {
             self.root = root
         } else {

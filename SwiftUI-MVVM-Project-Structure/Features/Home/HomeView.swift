@@ -13,11 +13,28 @@ struct HomeView: View {
     
     var body: some View {
         VStack(spacing: 30) {
-           
             
+            CircleButton(icon: "heart.fill"){
+                
+            }
+      
+            
+            Text("welcome_message".localized())
+                .font(.appFont(.bold, size: 15))
+                .foregroundColor(.red)
+
             Button("Push Notification") {
                 debugLog("Tapped Push")
                 sendLocalNotification()
+            }
+            
+            BaseButton(title: "DeepLink") {
+                if let url = URL(string: "deeplinkapp://") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button("Drag Drop") {
+                appState.push(.dragdrop) // PUSH
             }
             
             
@@ -42,24 +59,20 @@ struct HomeView: View {
                 appState.push(.details(productId: "Test"))
             }
             
-            Button("English") {
-                languageManager.currentLanguage = .english
+            Button("Switch Language") {
+                languageManager.currentLanguage =   (languageManager.currentLanguage == .english) ? .khmer : .english
+                    
             }
-            
-            Button("Khmer") {
-                languageManager.currentLanguage = .khmer
-            }
-            
             
             Button("Logout") {
                 appState.switchToAuth()
             }
             .foregroundColor(.red)
         }
-        .padding()
         .navigationTitle("Home")
     }
 }
+
 
 extension HomeView{
     

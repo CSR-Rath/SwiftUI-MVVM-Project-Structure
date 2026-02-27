@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-internal import Combine
 
 struct AuthRootView: View {
     @StateObject private var vm = LoginViewModel()
@@ -14,7 +13,7 @@ struct AuthRootView: View {
     @State var showLoading = false
     
     var body: some View {
-        ZStack { 
+        ZStack {
             VStack(spacing: 20) {
                 Text("Login")
                     .font(.largeTitle)
@@ -34,21 +33,5 @@ struct AuthRootView: View {
             }
         }
         .animation(.default, value: showLoading)
-    }
-    
-    final class LoginViewModel: ObservableObject {
-        
-        func login(appState: NavigationRouter,
-                   completion: @escaping () -> Void) {
-            
-            Task {
-//                try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds
-                
-                await MainActor.run {
-                    completion()
-                    appState.switchToHome()
-                }
-            }
-        }
     }
 }

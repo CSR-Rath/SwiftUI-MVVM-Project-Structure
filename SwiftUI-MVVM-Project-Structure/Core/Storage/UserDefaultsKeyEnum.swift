@@ -6,9 +6,12 @@
 //
 
 enum UserDefaultsKeyEnum: String {
-    case language = "app_language"
-    case userId = "user_id"
-    case login = "login_success"
-    case auth = "auth"
-    case appRoot = "app_root"
+    
+    case appLanguage     = "app_language"
+    case userId          = "user_id"
+    case isLoggedIn      = "is_logged_in"
+    case authToken       = "auth_token"
+    case appRootState    = "app_root_state"
+    case fruitDragDrop   = "fruit_drag_drop"
+    
 }

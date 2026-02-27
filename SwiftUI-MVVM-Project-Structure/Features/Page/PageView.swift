@@ -43,7 +43,6 @@ struct PageView: View {
                 }
             }
             .padding()
-            
         }
     }
 }
@@ -53,9 +52,7 @@ struct FirstPage: View {
     var body: some View {
         ZStack{
             Color.red
-            
         }
-       
     }
 }
 

@@ -6,7 +6,9 @@
   
 */
 
-
+// MARK: - Register screen
 login_title = "Login";
 welcome_message = "Welcome Back";
 logout_button = "Logout";
+
+// MARK: - Home screen
