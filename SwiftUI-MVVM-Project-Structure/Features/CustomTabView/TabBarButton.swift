@@ -7,20 +7,26 @@
 
 import SwiftUI
 
+
 struct TabBarButton: View {
+    
     let icon: String
     let name: String
-    let tab: Tab
+    let tab: TabEnum
     
-    @Binding var selectedTab: Tab
+    @Binding var selectedTab: TabEnum
+    @Binding var previousTab: TabEnum
     
     var body: some View {
+        
         Button {
-            withAnimation(.spring()) {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                previousTab = selectedTab
                 selectedTab = tab
             }
         } label: {
             VStack(spacing: 5) {
+                
                 Image(systemName: icon)
                     .font(.system(size: 22))
                     .foregroundColor(

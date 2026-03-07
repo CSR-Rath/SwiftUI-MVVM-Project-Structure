@@ -26,4 +26,9 @@ struct AppConfig {
         Bundle.main.requiredString(for: .buildVersion)
     }
     
+    static var appBundleIdentifier: String {
+        Bundle.main.requiredString(for: .appBundleIdetifier)
+    }
+    
+    
 }

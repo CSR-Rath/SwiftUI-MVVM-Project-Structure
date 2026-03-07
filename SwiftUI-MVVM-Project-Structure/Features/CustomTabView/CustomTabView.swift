@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-
-enum Tab {
-    case home
-    case search
-    case favorite
-    case profile
-}
-
 struct CustomTabView: View {
     
-    @State private var selectedTab: Tab = .home
+    @State private var selectedTab: TabEnum = .home
+    @State private var previousTab: TabEnum = .home
+    
+    var isPush: Bool {
+        selectedTab.rawValue > previousTab.rawValue
+    }
     
     var body: some View {
         
@@ -37,12 +34,23 @@ struct CustomTabView: View {
                     ProfileView()
                 }
             }
+            .id(selectedTab)
+            .transition(
+                .asymmetric(
+                    insertion: .move(edge: isPush ? .trailing : .leading),
+                    removal: .move(edge: isPush ? .leading : .trailing)
+                )
+            )
+            .animation(.easeInOut(duration: 0.25), value: selectedTab)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            CustomTabBar(selectedTab: $selectedTab)
-                .frame(maxWidth: .infinity, maxHeight: 85)
-                .background(.gray)
+
+            CustomTabBar(
+                selectedTab: $selectedTab,
+                previousTab: $previousTab
+            )
+            .frame(height: 85)
+            .frame(maxWidth: .infinity)
+            .background(.gray)
         }
     }
 }
-

@@ -19,20 +19,30 @@ final class NavigationRouter: ObservableObject {
     }
     
     // MARK: - Root Management
-    func switchToTabBar() {
+//    func switchToTabBar() {
+//        withAnimation(.easeInOut) {
+//            self.tabBarPath = []
+//            self.root = .tabbr
+//            self.saveRoot(.tabbr)
+//        }
+//    }
+    
+//    func switchToAuth() {
+//        withAnimation(.easeInOut) {
+//            self.tabBarPath = []
+//            self.root = .auth
+//            self.saveRoot(.auth)
+//        }
+//    }
+    
+    func switchRoot(_ root: AppRootType) {
         withAnimation(.easeInOut) {
-            self.root = .tabbr
+            self.root = root
             self.tabBarPath = []
-            self.saveRoot(.tabbr)
+            saveRoot(root)
         }
     }
     
-    func switchToAuth() {
-        withAnimation(.easeInOut) {
-            self.root = .auth
-            self.saveRoot(.auth)
-        }
-    }
     
     // MARK: - Navigation Actions
     func push(_ route: RouteType , animation: Bool = true) {
@@ -95,5 +105,4 @@ extension NavigationRouter{
             self.root = .auth
         }
     }
-    
 }

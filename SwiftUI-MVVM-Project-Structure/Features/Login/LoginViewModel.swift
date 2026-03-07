@@ -15,7 +15,7 @@ final class LoginViewModel: ObservableObject {
         Task {
             await MainActor.run {
                 completion()
-                appState.switchToTabBar()
+                appState.switchRoot(.tabbr)
             }
         }
     }

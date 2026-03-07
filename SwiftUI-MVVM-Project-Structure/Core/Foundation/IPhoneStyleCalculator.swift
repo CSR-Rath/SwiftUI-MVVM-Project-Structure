@@ -11,7 +11,7 @@ internal import Foundation
 struct IPhoneStyleCalculator {
     
     // MARK: - Public
-    
+
     static func calculate(_ lhs: String,
                           _ rhs: String,
                           operation: Operation) -> String {
@@ -79,4 +79,4 @@ let result = IPhoneStyleCalculator.calculate(
     operation: .divide
 )
 
-
+// result = 5 but use simple in programming 4.99....

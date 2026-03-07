@@ -7,17 +7,13 @@
 
 import SwiftUI
 
-
 extension Double {
-    
-    // MARK: - Private Helpers
-    
+
     // Rounding = floor only one round down
     // Rounding = halfUp have up and down base number (5>=Up) (5>Down)
-    
     // Computed Property use for no parameter needed ✔
     
-    
+    // MARK: - Private Helpers
     private var nonNegativeValue: Double {
         return self < 0 ? 0 : self
     }
@@ -41,26 +37,6 @@ extension Double {
         
         return formatter
     }
-    
-//    private func formattedCurrency(_ currency: CurrencyCode) -> String {
-//        
-//        let formatter = makeFormatter(
-//            minFraction: 0,//currency.maxFractionDigits == 0 ? 0 : 2,
-//            maxFraction: currency.maxFractionDigits,
-//            rounding: .halfUp
-//        )
-//        
-//        let value = formatter.string(from: NSNumber(value: nonNegativeValue)) ?? "0"
-//        
-//        let language = LanguageManager.shared.currentLanguage
-//        
-//        switch language {
-//        case .english:
-//            return "\(currency.rawValue) \(value)"
-//        default:
-//            return "\(value) \(currency.rawValue)"
-//        }
-//    }
     
     private func formattedCurrency(_ currency: CurrencyCode) -> String {
         
@@ -86,22 +62,27 @@ extension Double {
         }
     }
     
-    // MARK: - Currency
+}
+
+// MARK: - Currency
+extension Double{
     
     func toCurrency(_ currency: CurrencyCode) -> String {
         return formattedCurrency(currency)
     }
     
     var toCurrencyAsUSD: String {
-        formattedCurrency(.usd)
+       return formattedCurrency(.usd)
     }
     
     var toCurrencyAsKHR: String {
-        formattedCurrency(.khr)
+        return formattedCurrency(.khr)
     }
-    
-    
-    // MARK: - Fuel
+}
+
+
+// MARK: - Lister
+extension Double{
     
     var toAsLitter: String {
         let hasDecimal = nonNegativeValue.truncatingRemainder(dividingBy: 1) != 0
@@ -129,8 +110,11 @@ extension Double {
         
         return formatter.string(from: NSNumber(value: nonNegativeValue)) ?? "0"
     }
-    
-    // MARK: - Points
+}
+
+
+// MARK: - Points
+extension Double {
     
     var toAsPoint: String {
         let hasDecimal = nonNegativeValue.truncatingRemainder(dividingBy: 1) != 0
@@ -159,5 +143,4 @@ extension Double {
         
         return formatter.string(from: NSNumber(value: nonNegativeValue)) ?? "0"
     }
-    
 }

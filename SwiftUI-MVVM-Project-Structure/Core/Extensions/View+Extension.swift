@@ -8,6 +8,8 @@
 import SwiftUI
 
 extension View {
+    
+    // MARK: - Customer navigationBarBackButton
     func menuToolbar(appState: NavigationRouter) -> some View {
         self
             .navigationBarBackButtonHidden(true)
@@ -23,5 +25,13 @@ extension View {
                     }
                 }
             }
+    }
+}
+
+
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

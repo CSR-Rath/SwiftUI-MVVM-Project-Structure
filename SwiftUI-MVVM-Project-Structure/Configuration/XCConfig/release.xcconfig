@@ -9,17 +9,16 @@
 // https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 
 
-// MARK: - for test pagination
-BUNDLE_ID = com.rath.CoreStructure-iOS // com.compeny.myappname
+PRODUCT_BUNDLE_IDENTIFIER = com.rath.CoreStructure-iOS
 
-APP_NAME = SwiftUI Release
+APP_NAME = SwiftUI Debug
 
-APP_ICON = AppIconRelese
+APP_ICON = AppIcon
 
-BASE_URL = https:/$()/jsonplaceholder.typicode.com/
+BASE_URL = https:/$()/jsonplaceholder.typicode.com/uuu
 
-API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4-Release
+API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4-debug
 
-APP_VERSION = 1.0.0
+APP_VERSION = 2.0.0
 
 APP_BUILD = 1

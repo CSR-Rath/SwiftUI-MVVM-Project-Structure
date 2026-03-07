@@ -14,16 +14,22 @@ struct BaseTextField: View {
     var height: CGFloat = 50
     
     @Binding var text: String
-    var error: Binding<String?>? = nil
+    // Changed to a standard Binding for easier integration
+    @Binding var error: String?
     
+    private var hasError: Bool {
+        error != nil
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            // 1. Title Area
+            
+            // Title Layer
             HStack(spacing: 4) {
                 Text(title)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundColor(error?.wrappedValue == nil ? .secondary : .red)
+                    .foregroundColor(hasError ? .red : .secondary)
                 
                 if isRequired {
                     Text("*").foregroundColor(.red)
@@ -31,31 +37,72 @@ struct BaseTextField: View {
             }
             .padding(.leading, 2)
             
-            // 2. Input Area
-            TextField(placeholder, text: $text)
-                .padding(.horizontal, 12)
-                .frame(height: height)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(error?.wrappedValue == nil ? Color.clear : Color.red, lineWidth: 1)
-                )
-                .onChange(of: text) { _ in
-                    // Logic: If user types, clear the error immediately
-                    if error?.wrappedValue != nil {
-                        error?.wrappedValue = nil
+            // Input Layer
+            if #available(iOS 17.0, *) {
+                TextField(placeholder, text: $text)
+                    .padding(.horizontal, 12)
+                    .frame(height: height)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(hasError ? Color.red : Color.clear, lineWidth: 1)
+                    )
+                // Modern iOS 17+ syntax; use .onChange(of: text) { ... } for older versions
+                    .onChange(of: text) {
+                        if hasError { error = nil }
                     }
-                }
-            
-            // 3. Error Message Area
-            if let errorMessage = error?.wrappedValue {
-                Text(errorMessage)
-                    .font(.caption2)
-                    .foregroundColor(.red)
-                    .padding(.leading, 4)
+            } else {
+                // Fallback on earlier versions
             }
+            
+            // Error Message
+            Text(error ?? " ") // Space prevents height collapse if opacity is 1
+                .font(.caption2)
+                .foregroundColor(.red)
+                .padding(.leading, 4)
+                .opacity(hasError ? 1 : 0)
         }
-        .animation(.default, value: error?.wrappedValue)
+        .animation(.snappy, value: hasError)
     }
 }
+
+
+struct TestTextFieldView: View {
+    
+    @State private var username = ""
+    @State private var usernameError: String? = nil
+    
+    var body: some View {
+        
+        VStack(spacing: 20) {
+            
+            BaseTextField(
+                title: "Username",
+                placeholder: "Enter username",
+                isRequired: true,
+                text: $username,
+                error: $usernameError
+            )
+            
+            
+            Button("Submit") {
+                if username.isEmpty {
+                    usernameError = "Username is required"
+                }
+            }
+        }
+        .padding()
+    }
+}
+
+
+//extension BaseTextField {
+    // Allows you to skip the error binding in the parent view
+//    init(title: String, text: Binding<String>, isRequired: Bool = false) {
+//        self.title = title
+//        self._text = text
+//        self.isRequired = isRequired
+//        self._error = .constant(nil)
+//    }
+//}

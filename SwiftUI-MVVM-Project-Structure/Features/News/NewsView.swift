@@ -17,7 +17,7 @@ struct NewsView: View {
                 .font(.largeTitle)
                 .bold()
             
-            Button("Back") {
+            Button("login_title".localized()) {
                 appState.pop()
             }
         }

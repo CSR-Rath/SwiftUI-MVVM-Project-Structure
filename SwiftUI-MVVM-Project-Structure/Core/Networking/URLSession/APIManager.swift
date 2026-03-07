@@ -7,6 +7,7 @@
 
 internal import Foundation
 import Security
+import SwiftUI
 
 final class ApiManager {
     
@@ -69,6 +70,8 @@ final class ApiManager {
         switch httpResponse.statusCode {
         case 200...299:
             
+        
+            
             do {
                 return try JSONDecoder().decode(T.self, from: data)
             }  catch let decodingError as DecodingError {
@@ -91,7 +94,8 @@ final class ApiManager {
 
                 KeychainManager.delete(key: KeychainKeyEnum.accessToken)
                 KeychainManager.delete(key: KeychainKeyEnum.refreshToken)
-                
+                // Obverver when refresh fail
+                SessionManager.shared.expireSession()
                 throw APIError.unauthorized
             }
             

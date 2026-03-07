@@ -15,12 +15,18 @@ final class DeepLinkManager {
     private init() {}
     
     func openAppOrAppStore(appScheme: String, appStoreID: String) {
-        guard let appURL = URL(string: "\(appScheme)://") else { return }
+        guard let appURL = URL(string: "\(appScheme)://") else {
+            debugLog(" Error appURL appScheme")
+            return
+        }
         
         if UIApplication.shared.canOpenURL(appURL) {
             UIApplication.shared.open(appURL)
         } else {
-            guard let storeURL = URL(string: "https://apps.apple.com/app/id\(appStoreID)") else { return }
+            guard let storeURL = URL(string: "https://apps.apple.com/app/id\(appStoreID)") else {
+                debugLog(" Error appURL storeURL")
+                return
+            }
             UIApplication.shared.open(storeURL)
         }
     }

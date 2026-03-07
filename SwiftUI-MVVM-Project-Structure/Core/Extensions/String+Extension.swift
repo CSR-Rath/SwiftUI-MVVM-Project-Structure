@@ -7,9 +7,6 @@
 
 internal import Foundation
 
-
-
-// MARK:
 extension String {
     var isValidEmail: Bool {
         let emailRegex =
@@ -21,7 +18,7 @@ extension String {
 }
 
 
-// MARK: This is Computed Property use for convert string to number
+// MARK: This is Computed Property use for convert string to number without paramator
 extension String {
     
     var toSafeDouble: Double {
@@ -43,4 +40,5 @@ extension String {
     var toSafeInt: Int {
         return Int(self.toSafeDouble)
     }
+    
 }

@@ -18,7 +18,7 @@ enum APIError: Error {
 
 extension APIError: LocalizedError {
     
-    var errorDescription: String? {
+    var errorDescriptionFromAPIManager: String? {
         switch self {
         case .invalidURL:
             return "Invalid request URL."

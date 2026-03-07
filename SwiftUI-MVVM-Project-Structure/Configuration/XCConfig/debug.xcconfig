@@ -8,18 +8,17 @@
 // Configuration settings file format documentation can be found at:
 // https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 
-BUNDLE_ID = com.rath.CoreStructure-iOS
 
-APP_NAME = SwiftUI Debug
+PRODUCT_BUNDLE_IDENTIFIER = com.rath.CoreStructure
 
-APP_ICON = AppIconDebug
+APP_NAME = SwiftUI
+
+APP_ICON = AppIcon1
 
 BASE_URL = https:/$()/jsonplaceholder.typicode.com/
 
-API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4-debug
+API_KEY = AIzaSyAm5BMkEHnbOcVm1jtMHLUGCSJz4xvJ6s4-debug-tyu
 
-APP_VERSION = 2.0.0
+APP_VERSION = 2.2.2
 
-APP_BUILD = 2
-
-
+APP_BUILD = 9

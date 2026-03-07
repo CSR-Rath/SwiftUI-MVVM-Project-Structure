@@ -9,82 +9,78 @@
 internal import Foundation
 import Security
 
+
 final class KeychainManager {
-    
-//    @discardableResult is used to prevent warning when you call a function that returns a value, but you don’t use that value.
-    
+
+    private static let service = Bundle.main.bundleIdentifier ?? "com.keychain.default"
+
     @discardableResult
     static func save(key: KeychainKeyEnum, value: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
 
-        // Delete if exists
-        let queryDelete: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
-        ]
-        SecItemDelete(queryDelete as CFDictionary)
+        delete(key: key)
 
-        // Add new
-        let queryAdd: [String: Any] = [
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: key.rawValue,
             kSecValueData as String: data
         ]
-        let status = SecItemAdd(queryAdd as CFDictionary, nil)
-        
-        debugLog("status ==> \(status == errSecSuccess)")
+
+        let status = SecItemAdd(query as CFDictionary, nil)
         return status == errSecSuccess
     }
-    
+
+    static func read(key: KeychainKeyEnum) -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: key.rawValue,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+
+        var item: AnyObject?
+
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+
+        guard status == errSecSuccess,
+              let data = item as? Data else {
+            return nil
+        }
+
+        return String(data: data, encoding: .utf8)
+    }
+
     @discardableResult
     static func update(key: KeychainKeyEnum, value: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: key.rawValue
         ]
 
-        let attributesToUpdate: [String: Any] = [
+        let attributes: [String: Any] = [
             kSecValueData as String: data
         ]
 
-        let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
+        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+
         return status == errSecSuccess
-    }
-
-    
-    static func read(key: KeychainKeyEnum) -> String? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-
-        var item: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &item)
-
-        guard status == errSecSuccess,
-              let data = item as? Data,
-              let result = String(data: data, encoding: .utf8) else {
-            return nil
-        }
-        
-        debugLog("result ==> \(result)")
-        return result
     }
 
     @discardableResult
     static func delete(key: KeychainKeyEnum) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: key.rawValue
         ]
+
         let status = SecItemDelete(query as CFDictionary)
-        
-        debugLog("status ==> \(status == errSecSuccess)")
+
         return status == errSecSuccess
     }
-    
 }

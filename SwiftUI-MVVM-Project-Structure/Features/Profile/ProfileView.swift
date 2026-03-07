@@ -31,5 +31,6 @@ struct ProfileView: View {
             }
         }
         .navigationTitle("Profile")
+//        .preferredColorScheme(.light)
     }
 }
