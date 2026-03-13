@@ -12,13 +12,12 @@ struct CircleButton: View {
     let icon: String
     var iconSize: CGFloat = 20
     var size: CGFloat = 36
-    var backgroundColor: Color = .gray
-    
+    var backgroundColor: Color = .clear
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: icon)
+            Image(icon)
                 .symbolRenderingMode(.multicolor)
                 .resizable()
                 .scaledToFit()

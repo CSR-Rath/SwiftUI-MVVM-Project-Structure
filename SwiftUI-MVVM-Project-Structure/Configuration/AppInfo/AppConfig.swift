@@ -19,7 +19,6 @@ struct AppConfig {
     
     static var appVersion: String {
         Bundle.main.requiredString(for: .appVersion)
-        
     }
 
     static var appBuildVersion: String {
@@ -29,6 +28,4 @@ struct AppConfig {
     static var appBundleIdentifier: String {
         Bundle.main.requiredString(for: .appBundleIdetifier)
     }
-    
-    
 }

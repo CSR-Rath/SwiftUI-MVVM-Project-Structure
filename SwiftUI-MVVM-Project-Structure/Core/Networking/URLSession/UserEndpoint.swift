@@ -8,6 +8,8 @@
 import UIKit
 
 enum UserEndpoint: APIConfiguration {
+    
+    
     case login(credentials: Data?)
     case getPublicNews(page: Int, limit: Int, type: String?)
     case updateProfile

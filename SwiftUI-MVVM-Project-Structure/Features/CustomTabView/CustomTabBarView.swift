@@ -1,5 +1,5 @@
 //
-//  CustomTabBar.swift
+//  CustomTabBarView.swift
 //  SwiftUI-MVVM-Project-Structure
 //
 //  Created by Chhan Sophearath on 26/2/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomTabBar: View {
+struct CustomTabBarView: View {
     
     @Binding var selectedTab: TabEnum
     @Binding var previousTab: TabEnum
@@ -41,12 +41,12 @@ struct CustomTabBar: View {
             
             TabBarButton(
                 icon: "person.fill",
-                name: "Person",
+                name: "Setting",
                 tab: .profile,
                 selectedTab: $selectedTab,
                 previousTab: $previousTab
             )
+            
         }
     }
-    
 }

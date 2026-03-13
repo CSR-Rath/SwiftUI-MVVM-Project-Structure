@@ -65,7 +65,6 @@ class ScannerViewController: UIViewController {
         default:
             break
         }
-        
     }
     
     // MARK: - Camera Setup
@@ -98,23 +97,23 @@ class ScannerViewController: UIViewController {
         setupOverlay()
         startSession()
     }
+
     
-    @MainActor
     func startSession() {
         
         guard !captureSession.isRunning else { return }
         
         isScanning = true
         
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        Task { [weak self] in
+            guard let self = self else { return }
             
-            self?.captureSession.startRunning()
-            
-            DispatchQueue.main.async {
-                self?.startScanAnimation()
-            }
+            self.captureSession.startRunning()
+            self.startScanAnimation()
         }
     }
+    
+
     
     func stopSession() {
         if captureSession.isRunning {

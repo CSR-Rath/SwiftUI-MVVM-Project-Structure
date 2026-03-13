@@ -12,16 +12,16 @@ internal import Combine
 struct HomeFeatureCardView: View {
     
     @EnvironmentObject var appState: NavigationRouter
+    @State private var showHalfScreen = false
     
     let items: [FeatureItem]  = [
         FeatureItem(title: "Wallet", subtitle: "Manage Wallet", image: "wallet.pass", route: .wallet),
         FeatureItem(title: "Reward", subtitle: "Check Reward", image: "gift", route: .reward),
-        
     ]
     
     var body: some View {
         
-        HStack(spacing: 12) {
+        HStack(spacing: 16) {
             
             ForEach(items) { item in
                 
@@ -34,34 +34,57 @@ struct HomeFeatureCardView: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                     
-                    Spacer()
+                    HStack{
+                        Spacer()
+                        Image(systemName: item.image)
+                             .resizable()
+                              .scaledToFit()
+                              .frame(height: 80)
+                              .foregroundColor(.orange)
+                    }
+                    .padding(0)
                     
-                    Image(systemName: item.image)
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
                 }
                 .padding()
-                .frame(maxWidth: .infinity)
-                .frame(height: 120)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxHeight: .infinity)
                 .background(Color.white)
                 .cornerRadius(16)
-                .shadow(radius: 2)
+                .shadow(radius: 0.5)
                 .onTapGesture {
-                    print("Testing: \(item)")
-                    appState.push(item.route)
+
+                    if item.route == AppRouteType.wallet{
+                        showHalfScreen = true
+                    }
                 }
-                
             }
         }
         .padding(0)
+        
+        .sheet(isPresented: $showHalfScreen) {
+            
+            HalfScreenView()
+                .presentationDetents([.medium, .large])
+        }
     }
 }
-
 
 struct FeatureItem: Identifiable {
     let id = UUID()
     let title: String
     let subtitle: String
     let image: String
-    let route: RouteType
+    let route: AppRouteType
+}
+
+struct HalfScreenView: View {
+    var body: some View {
+        VStack {
+            Text("This is a half-screen modal")
+                .font(.title)
+                .padding()
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+    }
 }

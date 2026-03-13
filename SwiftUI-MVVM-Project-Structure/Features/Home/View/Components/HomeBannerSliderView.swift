@@ -5,12 +5,8 @@
 //  Created by Chhan Sophearath on 7/3/26.
 //
 
-
 import SwiftUI
 internal import Combine
-import SwiftUI
-import SwiftUI
-import Kingfisher
 
 struct HomeBannerSliderView: View {
     
@@ -39,7 +35,7 @@ struct HomeBannerSliderView: View {
             
             ForEach(Array(safeBanners.enumerated()), id: \.element.id) { index, banner in
                 
-                BannerItem(
+                BannerAspectRatioView(
                     imageUrl: banner.imageUrl,
                     onSizeDetected: { ratio in
                         if index == 0 {
@@ -51,7 +47,9 @@ struct HomeBannerSliderView: View {
                 .onTapGesture {
                     print("Testing: \(index)")
                 }
+                
             }
+            
         }
         .aspectRatio(aspectRatio, contentMode: .fit)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
@@ -64,6 +62,7 @@ struct HomeBannerSliderView: View {
             withAnimation {
                 currentIndex = (currentIndex + 1) % safeBanners.count
             }
+            
         }
     }
 }
@@ -76,51 +75,3 @@ struct BannerModel: Identifiable {
 }
 
 
-
-struct BannerItem: View {
-    
-    let imageUrl: String
-    let defaultImageName: String? = "imageBanner"
-    var onSizeDetected: ((CGFloat) -> Void)? = nil
-    
-    @State private var loadFailed = false
-    
-    var body: some View {
-        
-        Group {
-            
-            if loadFailed || imageUrl.isEmpty {
-                
-                Image(defaultImageName ?? "imageBanner")
-                    .resizable()
-                    .scaledToFit()
-                    .background(
-                        GeometryReader { geo in
-                            Color.clear.onAppear {
-                                let ratio = geo.size.width / geo.size.height
-                                onSizeDetected?(ratio)
-                            }
-                        }
-                    )
-                
-            } else {
-                
-                KFImage(URL(string: imageUrl))
-                    .placeholder {
-                        ProgressView()
-                    }
-                    .onSuccess { result in
-                        let size = result.image.size
-                        let ratio = size.width / size.height
-                        onSizeDetected?(ratio)
-                    }
-                    .onFailure { _ in
-                        loadFailed = true
-                    }
-                    .resizable()
-                    .scaledToFit()
-            }
-        }
-        .clipped()
-    }
-}

@@ -30,14 +30,14 @@ struct HomeUpgradeBannerView: View {
             
             Image(systemName: "arrow.right.circle.fill")
                 .foregroundColor(.white)
+                .frame(width: 25, height: 25)
         }
-        .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
+        .padding(10)
         .background( Color.black)
         .cornerRadius(16)
         .onTapGesture {
           
             appState.push(.upgrade)
         }
-        
     }
 }

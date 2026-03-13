@@ -1,5 +1,5 @@
 //
-//  CustomTabView.swift
+//  MainTabView.swift
 //  SwiftUI-MVVM-Project-Structure
 //
 //  Created by Chhan Sophearath on 25/2/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomTabView: View {
+struct MainTabView: View {
     
     @State private var selectedTab: TabEnum = .home
     @State private var previousTab: TabEnum = .home
@@ -25,13 +25,16 @@ struct CustomTabView: View {
             Group {
                 switch selectedTab {
                 case .home:
-                    HomeView()
+                    
+                    TestView()
                 case .search:
+                    
                     NewsView()
                 case .favorite:
-                    SettingsView()
-                case .profile:
+                    
                     ProfileView()
+                case .profile:
+                    SettingsView()
                 }
             }
             .id(selectedTab)
@@ -44,7 +47,7 @@ struct CustomTabView: View {
             .animation(.easeInOut(duration: 0.25), value: selectedTab)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            CustomTabBar(
+            CustomTabBarView(
                 selectedTab: $selectedTab,
                 previousTab: $previousTab
             )

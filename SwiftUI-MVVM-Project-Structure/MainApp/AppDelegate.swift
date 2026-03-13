@@ -28,11 +28,11 @@ class AppDelegate: NSObject, UIApplicationDelegate{
         requestNotificationPermission(application: application)
         return true
     }
-    
 }
 
 
-// MARK: - Configuretion
+
+// MARK: - Configuretion notification
 extension  AppDelegate{
     // Configure google maps key
     private func configureGoogleMaps(){
@@ -59,7 +59,9 @@ extension  AppDelegate{
             }
         }
     }
+    
 }
+
 
 
 // MARK: - Remark we need appple developer to handle APNs
@@ -80,7 +82,6 @@ extension AppDelegate: MessagingDelegate{
         debugLog("FCM Token: \(fcmToken ?? "")")
     }
 }
-
 
 
 
@@ -113,17 +114,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
             return
         }
         
-       
         debugLog("====> type: \(type)")
         
         switch type {
         case .message:
             appState?.push(.customerList)
-//            appState?.push(.profile(userId: "Test NO"))
         case .order:
             appState?.push(.settings)
         default:
             break
         }
     }
+    
 }

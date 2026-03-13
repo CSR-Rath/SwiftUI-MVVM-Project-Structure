@@ -11,74 +11,65 @@ internal import Combine
 @MainActor
 final class NavigationRouter: ObservableObject {
     @Published  var root: AppRootType = .auth
-    @Published  var tabBarPath: [RouteType] = []
+    
+    @Published  var appRoute: [AppRouteType] = []
+
                     
         
     init() {
         loadRoot()
     }
     
-    // MARK: - Root Management
-//    func switchToTabBar() {
-//        withAnimation(.easeInOut) {
-//            self.tabBarPath = []
-//            self.root = .tabbr
-//            self.saveRoot(.tabbr)
-//        }
-//    }
-    
-//    func switchToAuth() {
-//        withAnimation(.easeInOut) {
-//            self.tabBarPath = []
-//            self.root = .auth
-//            self.saveRoot(.auth)
-//        }
-//    }
+
     
     func switchRoot(_ root: AppRootType) {
         withAnimation(.easeInOut) {
             self.root = root
-            self.tabBarPath = []
+
+            appRoute.removeAll()
             saveRoot(root)
         }
     }
     
     
     // MARK: - Navigation Actions
-    func push(_ route: RouteType , animation: Bool = true) {
-        guard tabBarPath.last != route else { return }
+    func push(_ route: AppRouteType , animation: Bool = true) {
+        guard appRoute.last != route else { return }
         if animation {
-            tabBarPath.append(route)
+            appRoute.append(route)
             
         }else{
             noAnimation {
-                tabBarPath.append(route)
+                appRoute.append(route)
             }
         }
+        
+        debugLog(" Navigation Push -> \(route)")
     }
     
     func pop(animation: Bool = true) {
-        guard !tabBarPath.isEmpty else { return }
+        guard !appRoute.isEmpty else { return }
         
         if animation{
-            tabBarPath.removeLast()
+            appRoute.removeLast()
             
         }else{
             noAnimation {
-                tabBarPath.removeLast()
+                appRoute.removeLast()
             }
         }
+        
     }
     
-    func popTo(_ route: RouteType) {
-        if let index = tabBarPath.firstIndex(of: route) {
+    func popTo(_ route: AppRouteType) {
+        if let index = appRoute.firstIndex(of: route) {
             // This is cleaner and prevents flickering
-            tabBarPath = Array(tabBarPath.prefix(through: index))
+            appRoute = Array(appRoute.prefix(through: index))
         }
     }
     
     func popToRoot() {
-        tabBarPath = []
+        appRoute.removeAll()
     }
     
     private func noAnimation(_ action: () -> Void) {
@@ -106,3 +97,6 @@ extension NavigationRouter{
         }
     }
 }
+
+
+

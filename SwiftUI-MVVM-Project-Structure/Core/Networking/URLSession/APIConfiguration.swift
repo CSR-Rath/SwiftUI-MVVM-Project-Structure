@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 protocol APIConfiguration {
     var path: String { get }
     var method: HTTPMethods { get }

@@ -14,6 +14,7 @@ final class DeepLinkManager {
     
     private init() {}
     
+    // To open url
     func openAppOrAppStore(appScheme: String, appStoreID: String) {
         guard let appURL = URL(string: "\(appScheme)://") else {
             debugLog(" Error appURL appScheme")
@@ -31,6 +32,8 @@ final class DeepLinkManager {
         }
     }
     
+    
+    // From receive url
     func handle(url: URL, router: NavigationRouter) {
         
         debugLog("Deep link: \(url.absoluteString)")
@@ -41,7 +44,7 @@ final class DeepLinkManager {
         }
         
         // Switch root flow (if needed)
-        router.root = .tabbr
+        router.root = .tabBar
         
         // Reset navigation stack
         router.popToRoot()

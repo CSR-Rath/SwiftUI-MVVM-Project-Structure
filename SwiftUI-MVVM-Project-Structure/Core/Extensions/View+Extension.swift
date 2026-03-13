@@ -29,6 +29,32 @@ extension View {
 }
 
 
+extension View{
+    
+     func sendLocalNotification() {
+        
+        let content = UNMutableNotificationContent()
+        content.title = "New Message"
+        content.body = "Tap to open Profile"
+        content.sound = .default
+        
+        // 🔥 Important: Add custom data
+        content.userInfo = [
+            "type": "message"
+        ]
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: trigger
+        )
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+}
+
 
 extension View {
     func hideKeyboard() {

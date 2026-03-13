@@ -14,7 +14,4 @@ enum InfoKey: String {
     case appName = "CFBundleDisplayName"
     case appVersion = "CFBundleShortVersionString"
     case buildVersion = "CFBundleVersion"
-  
 }
-
-

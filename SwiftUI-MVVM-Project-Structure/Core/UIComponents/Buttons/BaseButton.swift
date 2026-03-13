@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BaseButton: View {
+    
     let title: String
     let action: () -> Void
     

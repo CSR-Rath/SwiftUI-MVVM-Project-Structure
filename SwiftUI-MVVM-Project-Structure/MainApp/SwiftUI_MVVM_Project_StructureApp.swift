@@ -14,24 +14,20 @@ struct SwiftUI_MVVM_Project_StructureApp: App {
     
     /// allow woring witth appDelegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    
     @StateObject private var appState = NavigationRouter()
-    @StateObject private var languageManager = LanguageManager.shared
-    @AppStorage("appTheme") private var appTheme: AppTheme = .system
+    @AppStorage(AppStorageKey.appTheme) private var appTheme: AppTheme = .system
     
     
     init() {
         setUINavigationBarAppearance()
     }
     
-    
     var body: some Scene {
         WindowGroup {
-            
-            RootView()
+            OTPView()
+//            RootView()
                 .environmentObject(appState)
-                .environmentObject(languageManager)
+                .environmentObject(LanguageManager.shared)
                 .preferredColorScheme(colorScheme)
                 .onReceive(NotificationCenter.default.publisher(for: .sessionExpired)) { _ in
                     
@@ -46,26 +42,23 @@ struct SwiftUI_MVVM_Project_StructureApp: App {
                     
                     appDelegate.appState = appState
                 }
-            
         }
     }
-    
     
     private var colorScheme: ColorScheme? {
         switch appTheme {
         case .system:
-            return nil   // Follow system
+            return nil // Follow system
         case .light:
-            return .light
+            return .light // custom light
         case .dark:
-            return .dark
+            return .dark // custom dark
         }
     }
+    
 }
 
 extension SwiftUI_MVVM_Project_StructureApp{
-    
-    
     
     private func setUINavigationBarAppearance(){
         let scrollEdgeAppearance = UINavigationBarAppearance()
@@ -98,11 +91,5 @@ extension SwiftUI_MVVM_Project_StructureApp{
         UINavigationBar.appearance().standardAppearance = standardAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
     }
-}
-
-
-
-
-class ThemeManager: ObservableObject {
-    @Published var isDarkHeader: Bool = false
+    
 }

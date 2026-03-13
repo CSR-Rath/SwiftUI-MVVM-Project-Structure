@@ -7,20 +7,18 @@
 
 import SwiftUI
 
-enum AppRootType: String{
-    case auth
-    case tabbr
-}
-
 // MARK: - We use Hashable because NavigationStack requires it.
-enum RouteType: Hashable {
-    case settings
+enum AppRouteType: Hashable {
+  
     case customerList
     case dragdrop
     case profile(userId: String)
     case details(productId: String)
     case scanner
     case baseTextField
+    
+    
+    // MARK: -  HomeView
     case fun
     case specialOffer
     case travel
@@ -30,9 +28,17 @@ enum RouteType: Hashable {
     case upgrade
     case memberShip
     
+    
+    // MARK: -  Setting
+    case settings
+    
+    
+
+    
+    
 }
 
-extension RouteType {
+extension AppRouteType {
     
     @ViewBuilder
     func build() -> some View {
@@ -41,20 +47,21 @@ extension RouteType {
         case .settings:
             SettingsView()
             
-        case .profile(let  userId):
-            
+        case .profile(_):
             ProfileView()
             
         case .details(_):
-            
             Text("Product Detail")
-        case .customerList:
             
+        case .customerList:
             CustomerListView()
+            
         case .dragdrop:
             DragDropListView()
+            
         case .scanner:
             ScanQRCodeView()
+            
         case .baseTextField:
             TestTextFieldView()
             

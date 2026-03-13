@@ -39,7 +39,7 @@ final class ApiManager {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = config.method.rawValue
+        request.httpMethod = "GET"//config.method.rawValue
         request.httpBody = config.body
         
         // MARK: Hander request api
@@ -138,7 +138,7 @@ extension ApiManager{
         }
         
         if let body = request.httpBody {
-            print(String(data: body, encoding: .utf8) ?? "")
+            debugLog("Body: \(body.toJSONString() ?? "-")")
         }
         
         debugLog("⬆️⬆️⬆️ END REQUEST ⬆️⬆️⬆️\n\n")
@@ -146,12 +146,8 @@ extension ApiManager{
     
     private func printResponse(data: Data) {
         debugLog("=== RESPONSE DATA ====")
-        
-        if let body = String(data: data, encoding: .utf8) {
-            debugLog(body)
-        } else {
-            debugLog("Unable to decode response body")
-        }
+
+        debugLog(data.toJSONString() ?? "")
         
         debugLog("=== END RESPONSE DATA ====\n\n")
     }

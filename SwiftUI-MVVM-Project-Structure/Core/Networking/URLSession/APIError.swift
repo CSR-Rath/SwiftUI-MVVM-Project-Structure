@@ -38,4 +38,5 @@ extension APIError: LocalizedError {
             return "Secure connection failed."
         }
     }
+    
 }

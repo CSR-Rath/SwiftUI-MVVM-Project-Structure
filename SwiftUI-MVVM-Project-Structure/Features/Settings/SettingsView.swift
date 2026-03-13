@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @AppStorage("appTheme") private var appTheme: AppTheme = .system
+    @AppStorage(AppStorageKey.appTheme) private var appTheme: AppTheme = .system
     
     var body: some View {
         ZStack{
@@ -20,8 +20,7 @@ struct SettingsView: View {
             }
             .pickerStyle(.segmented)
             .padding()
-            
         }
     }
+    
 }
-
